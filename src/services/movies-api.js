@@ -1,5 +1,8 @@
-const BASE_URL = 'https://developers.themoviedb.org/3';
+const BASE_URL = 'https://api.themoviedb.org/3';
 const API_KEY = 'cc0ba8d7ea5bf241e069bff954347f20';
+
+const TREND_URL = `${BASE_URL}/trending/movie/day?api_key=${API_KEY}`;
+export const POSTER_URL = 'https://image.tmdb.org/t/p/w500';
 
 async function fetchWithErrorHandling(url = '', config = {}) {
   const response = await fetch(url, config);
@@ -9,9 +12,7 @@ async function fetchWithErrorHandling(url = '', config = {}) {
 }
 
 export function fetchTrendingMovies() {
-  return fetchWithErrorHandling(
-    `${BASE_URL}/trending/get-trending/api_key=${API_KEY}`,
-  );
+  return fetchWithErrorHandling(TREND_URL);
 }
 
 // export function fetchAuthors() {
