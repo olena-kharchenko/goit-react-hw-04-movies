@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
-import * as moviesApi from '../../services/movies-api';
+import { fetchTrendingMovies, POSTER_URL } from '../../services/movies-api';
 import s from './HomePage.module.css';
 // import PageHeading from '../components/PageHeading/PageHeading';
 
@@ -9,7 +9,7 @@ export default function HomePage() {
   const [films, setFilms] = useState([]);
 
   useEffect(() => {
-    moviesApi.fetchTrendingMovies().then(request => setFilms(request.results));
+    fetchTrendingMovies().then(request => setFilms(request.results));
   }, []);
 
   return (
@@ -23,7 +23,7 @@ export default function HomePage() {
               <Link to={`${url}/${film.id}`} className={s.link}>
                 <img
                   className={s.image}
-                  src={moviesApi.POSTER_URL + film.poster_path}
+                  src={POSTER_URL + film.poster_path}
                   alt={film.title}
                 />
                 <p className={s.title}>{film.title}</p>
