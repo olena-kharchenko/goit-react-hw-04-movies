@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { fetchMovieDetails } from '../../services/movies-api';
-import { POSTER_URL } from '../../services/movies-api';
+import { useParams, NavLink, Route, useRouteMatch } from 'react-router-dom';
+import { fetchMovieDetails, POSTER_URL } from '../../services/movies-api';
+import Cast from '../Cast';
+import Reviews from '../Reviews';
 
 import s from './MovieDetailsPage.module.css';
 
 export default function MovieDetailsPage() {
   const { movieId } = useParams();
+  const { url, path } = useRouteMatch();
   const [film, setFilm] = useState({});
 
   useEffect(() => {
@@ -14,23 +16,59 @@ export default function MovieDetailsPage() {
   }, [movieId]);
 
   return (
-    <div className={s.wrapper}>
-      <img
-        className={s.image}
-        src={POSTER_URL + film.poster_path}
-        alt={film.title}
-        widht="300"
-        height="450"
-      />
-      <div className={s.rightPart}>
-        <h2 className={s.title}>{film.title}</h2>
-        <span className={s.subtitle}>Rating </span>
-        <span>{film.vote_average}</span>
-        <p className={s.subtitle}>Overview</p>
-        <p>{film.overview}</p>
-        <p className={s.subtitle}>Genres</p>
-        <p>{film.genres && film.genres.map(item => item.name + ' ')}</p>
+    <div>
+      <div className={s.wrapper}>
+        <img
+          className={s.image}
+          src={POSTER_URL + film.poster_path}
+          alt={film.title}
+          widht="300"
+          height="450"
+        />
+        <div className={s.rightPart}>
+          <h2 className={s.title}>{film.title}</h2>
+          <span className={s.subtitle}>Rating </span>
+          <span>{film.vote_average}</span>
+          <p className={s.subtitle}>Overview</p>
+          <p>{film.overview}</p>
+
+          {film.genres && (
+            <>
+              <p className={s.subtitle}>Genres</p>
+              <ul className={s.list}>
+                {film.genres.map(item => (
+                  <li className={s.item}>{item.name}</li>
+                ))}
+              </ul>
+            </>
+          )}
+        </div>
       </div>
+
+      <nav className={s.nav}>
+        <NavLink
+          to={`${url}/cast`}
+          className={s.link}
+          activeClassName={s.activeLink}
+        >
+          Cast
+        </NavLink>
+        <NavLink
+          to={`${url}/reviews`}
+          className={s.link}
+          activeClassName={s.activeLink}
+        >
+          Reviews
+        </NavLink>
+      </nav>
+
+      <Route path={`${path}:movieId/cast`}>
+        <Cast />
+      </Route>
+
+      <Route path={`${path}:movieId/reviews`}>
+        <Reviews />
+      </Route>
     </div>
   );
 }
