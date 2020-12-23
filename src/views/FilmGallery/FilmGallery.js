@@ -15,6 +15,8 @@ function FilmGallery({ films }) {
               className={s.image}
               src={POSTER_URL + film.poster_path}
               alt={film.title}
+              width="300"
+              height="450"
             />
             <p className={s.title}>{film.title}</p>
           </Link>

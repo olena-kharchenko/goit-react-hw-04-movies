@@ -1,0 +1,26 @@
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.image {
+  margin-left: 20px;
+  margin-right: 30px;
+  width: 300px;
+  height: auto;
+}
+
+.title {
+  font-size: 26px;
+}
+
+.subtitle {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.rightPart {
+  max-width: 800px;
+}

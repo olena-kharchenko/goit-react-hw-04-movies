@@ -1,3 +1,9 @@
+.title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+}
+
 .list {
   display: flex;
   flex-wrap: wrap;
@@ -32,6 +38,6 @@
   height: auto;
 }
 
-.title {
+.filmTitle {
   font-size: 20px;
 }

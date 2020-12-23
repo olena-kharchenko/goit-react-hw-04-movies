@@ -22,14 +22,9 @@ export function fetchMoviesByName(name) {
   );
 }
 
-// export function fetchAuthors() {
-//   return fetchWithErrorHandling(`${BASE_URL}/authors?_embed=books`);
-// }
-
-// export function fetchBooks() {
-//   return fetchWithErrorHandling(`${BASE_URL}/books`);
-// }
-
-// export function fetchBookById(bookId) {
-//   return fetchWithErrorHandling(`${BASE_URL}/books/${bookId}?_expand=author`);
-// }
+export function fetchMovieDetails(id) {
+  console.log(id);
+  return fetchWithErrorHandling(
+    `${BASE_URL}/movie/${id}?api_key=${API_KEY}&language=en-US`,
+  );
+}
