@@ -9,8 +9,8 @@ function FilmErrorView({ message }) {
   );
 }
 
-// ImagesErrorView.propTypes = {
-//   message: PropTypes.string.isRequired,
-// };
+FilmErrorView.propTypes = {
+  message: PropTypes.string.isRequired,
+};
 
 export default FilmErrorView;

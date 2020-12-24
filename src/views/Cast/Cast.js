@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { fetchMovieCast, POSTER_URL } from '../../services/movies-api';
 import s from './Cast.module.css';
 
@@ -14,10 +15,10 @@ export default function Cast({ movieId }) {
       {cast && (
         <>
           <ul className={s.list}>
-            {cast.map((item, index) => (
+            {cast.map(item => (
               <>
                 {item.profile_path && (
-                  <li key={index} className={s.item}>
+                  <li key={item.profile_path} className={s.item}>
                     <img
                       className={s.image}
                       src={POSTER_URL + item.profile_path}
@@ -35,3 +36,7 @@ export default function Cast({ movieId }) {
     </>
   );
 }
+
+Cast.propTypes = {
+  movieId: PropTypes.string.isRequired,
+};

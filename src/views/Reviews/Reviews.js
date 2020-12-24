@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { fetchMovieReviews, POSTER_URL } from '../../services/movies-api';
+import PropTypes from 'prop-types';
+import { fetchMovieReviews } from '../../services/movies-api';
 import s from './Reviews.module.css';
 
 export default function Reviews({ movieId }) {
@@ -28,3 +29,7 @@ export default function Reviews({ movieId }) {
     </div>
   );
 }
+
+Reviews.propTypes = {
+  movieId: PropTypes.string.isRequired,
+};

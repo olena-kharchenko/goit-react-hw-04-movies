@@ -26,8 +26,8 @@ function FilmGallery({ films }) {
   );
 }
 
-// ImageGallery.propTypes = {
-//   images: PropTypes.array.isRequired,
-// };
+FilmGallery.propTypes = {
+  images: PropTypes.array,
+};
 
 export default FilmGallery;
