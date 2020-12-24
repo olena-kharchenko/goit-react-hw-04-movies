@@ -1,8 +1,15 @@
-import { useState, useEffect } from 'react';
-import { useParams, NavLink, Route, useRouteMatch } from 'react-router-dom';
+import { useState, useEffect, lazy, Suspense } from 'react';
+import {
+  useParams,
+  NavLink,
+  Route,
+  useRouteMatch,
+  Switch,
+} from 'react-router-dom';
 import { fetchMovieDetails, POSTER_URL } from '../../services/movies-api';
 import Cast from '../Cast';
 import Reviews from '../Reviews';
+import FilmPendingView from '../FilmPendingView';
 
 import s from './MovieDetailsPage.module.css';
 
@@ -62,13 +69,17 @@ export default function MovieDetailsPage() {
         </NavLink>
       </nav>
 
-      <Route path={`${path}:movieId/cast`}>
-        <Cast />
-      </Route>
+      <Suspense fallback={<FilmPendingView />}>
+        <Switch>
+          <Route path={`${path}:movieId/cast`}>
+            <Cast />
+          </Route>
 
-      <Route path={`${path}:movieId/reviews`}>
-        <Reviews />
-      </Route>
+          <Route path={`${path}:movieId/reviews`}>
+            <Reviews />
+          </Route>
+        </Switch>
+      </Suspense>
     </div>
   );
 }
