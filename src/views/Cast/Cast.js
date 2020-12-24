@@ -24,6 +24,7 @@ export default function Cast({ movieId }) {
                       src={POSTER_URL + item.profile_path}
                       alt={item.name}
                       widht="100"
+                      height="150"
                     />
                     <p> {item.name}</p>
                   </li>

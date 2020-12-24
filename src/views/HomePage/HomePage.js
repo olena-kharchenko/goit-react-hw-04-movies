@@ -44,18 +44,22 @@ export default function HomePage() {
             <p className={s.title}>Trending today</p>
             <ul className={s.list}>
               {films.map(film => (
-                <li key={film.id} className={s.item}>
-                  <Link to={`${url}movies/${film.id}`} className={s.link}>
-                    <img
-                      className={s.image}
-                      src={POSTER_URL + film.poster_path}
-                      alt={film.title}
-                      width="300"
-                      height="450"
-                    />
-                    <p className={s.filmTitle}>{film.title}</p>
-                  </Link>
-                </li>
+                <>
+                  {film.poster_path && (
+                    <li key={film.id} className={s.item}>
+                      <Link to={`${url}movies/${film.id}`} className={s.link}>
+                        <img
+                          className={s.image}
+                          src={POSTER_URL + film.poster_path}
+                          alt={film.title}
+                          width="300"
+                          height="450"
+                        />
+                        <p className={s.filmTitle}>{film.title}</p>
+                      </Link>
+                    </li>
+                  )}
+                </>
               ))}
             </ul>
           </>

@@ -19,7 +19,6 @@ function FilmsStatus({ filmName, queryURL }) {
   const [films, setFilms] = useState([]);
 
   const fetchFilms = name => {
-    setStatus(Status.PENDING);
     fetchMoviesByName(name)
       .then(newFilms => {
         if (newFilms.total_results > 0) {
@@ -34,12 +33,13 @@ function FilmsStatus({ filmName, queryURL }) {
   };
 
   useEffect(() => {
-    if (filmName === '' && queryURL) {
+    if (filmName === '' && queryURL !== null) {
       fetchFilms(queryURL);
       return;
     }
-
-    fetchFilms(filmName);
+    if (filmName) {
+      fetchFilms(filmName);
+    }
   }, [filmName, queryURL]);
 
   if (status === Status.IDLE) {
