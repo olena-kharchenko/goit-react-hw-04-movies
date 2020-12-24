@@ -1,3 +1,28 @@
-export default function Reviews() {
-  return <p>Reviews</p>;
+import { useState, useEffect } from 'react';
+import { fetchMovieReviews, POSTER_URL } from '../../services/movies-api';
+import s from './Reviews.module.css';
+
+export default function Reviews({ movieId }) {
+  const [reviews, setReviews] = useState([]);
+
+  useEffect(() => {
+    fetchMovieReviews(movieId).then(request => setReviews(request.results));
+  }, [movieId]);
+
+  return (
+    <div className={s.wrapper}>
+      {reviews && (
+        <>
+          <ul className={s.list}>
+            {reviews.map((item, index) => (
+              <li key={index} className={s.item}>
+                <p className={s.title}> {item.author}</p>
+                <p> {item.content}</p>
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
+    </div>
+  );
 }
