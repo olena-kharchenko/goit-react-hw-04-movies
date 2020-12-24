@@ -43,8 +43,10 @@ export default function MovieDetailsPage() {
             <>
               <p className={s.subtitle}>Genres</p>
               <ul className={s.list}>
-                {film.genres.map(item => (
-                  <li className={s.item}>{item.name}</li>
+                {film.genres.map((item, index) => (
+                  <li key={index} className={s.item}>
+                    {item.name}
+                  </li>
                 ))}
               </ul>
             </>
@@ -72,11 +74,11 @@ export default function MovieDetailsPage() {
       <Suspense fallback={<FilmPendingView />}>
         <Switch>
           <Route path={`${path}:movieId/cast`}>
-            <Cast />
+            <Cast movieId={movieId} />
           </Route>
 
           <Route path={`${path}:movieId/reviews`}>
-            <Reviews />
+            <Reviews movieId={movieId} />
           </Route>
         </Switch>
       </Suspense>
