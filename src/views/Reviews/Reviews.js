@@ -11,7 +11,7 @@ export default function Reviews({ movieId }) {
 
   return (
     <div className={s.wrapper}>
-      {reviews && (
+      {reviews.length > 0 ? (
         <>
           <ul className={s.list}>
             {reviews.map((item, index) => (
@@ -22,6 +22,8 @@ export default function Reviews({ movieId }) {
             ))}
           </ul>
         </>
+      ) : (
+        <p className={s.text}>No reviews to show</p>
       )}
     </div>
   );

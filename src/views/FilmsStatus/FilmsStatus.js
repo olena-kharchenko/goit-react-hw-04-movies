@@ -13,19 +13,14 @@ const Status = {
   REJECTED: 'rejected',
 };
 
-function FilmsStatus({ filmName }) {
+function FilmsStatus({ filmName, queryURL }) {
   const [error, setError] = useState({});
   const [status, setStatus] = useState(Status.IDLE);
   const [films, setFilms] = useState([]);
 
-  useEffect(() => {
-    if (filmName === '') {
-      return;
-    }
-
+  const fetchFilms = name => {
     setStatus(Status.PENDING);
-
-    fetchMoviesByName(filmName)
+    fetchMoviesByName(name)
       .then(newFilms => {
         if (newFilms.total_results > 0) {
           setFilms(newFilms.results);
@@ -36,7 +31,16 @@ function FilmsStatus({ filmName }) {
         setError(err);
         setStatus(Status.REJECTED);
       });
-  }, [filmName]);
+  };
+
+  useEffect(() => {
+    if (filmName === '' && queryURL) {
+      fetchFilms(queryURL);
+      return;
+    }
+
+    fetchFilms(filmName);
+  }, [filmName, queryURL]);
 
   if (status === Status.IDLE) {
     return <p className={s.message}>Please enter your search term</p>;
